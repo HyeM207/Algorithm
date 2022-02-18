@@ -1,0 +1,7 @@
+-- 관리자의 실수로 일부 동물의 입양일이 잘못 입력되었습니다. 보호 시작일보다 입양일이 더 빠른 동물의 아이디와 이름을 조회하는 SQL문
+-- 보호 시작일이 빠른 순으로 조회할 것
+SELECT ANIMAL_INS.ANIMAL_ID, ANIMAL_INS.NAME
+    FROM ANIMAL_INS INNER JOIN ANIMAL_OUTS
+    ON ANIMAL_INS.ANIMAL_ID = ANIMAL_OUTS.ANIMAL_ID
+    WHERE ANIMAL_INS.DATETIME > ANIMAL_OUTS.DATETIME
+    ORDER BY ANIMAL_INS.DATETIME;
