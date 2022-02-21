@@ -43,3 +43,28 @@ class Solution:
             result = max(result, isPalindrome(i, i+1), isPalindrome(i, i+2), key=len)
         
         return result
+
+
+# Solution 3 : (재풀이) 풀이방법 2 이용 
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        
+        result = ''
+        
+        def sliding(left, right) :
+            while left >=0 and right < len(s) and s[left] == s[right] :
+                left -= 1
+                right += 1
+            # print(left, right)
+            return s[left+1:right] # +1 하는 것 잊지 말기
+        
+        if len(s) < 2:
+            return s
+        
+        for i in range(len(s)-1) :
+            even_len = sliding(i,i+1)
+            odd_len = sliding(i, i+2)
+            print('i :', i, 'even_len : ' ,even_len, 'odd_len :', odd_len)
+            result = max(result, even_len, odd_len, key=len)
+            
+        return result
