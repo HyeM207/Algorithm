@@ -11,5 +11,4 @@ class Solution:
 # Solution 2
 class Solution:
     def reverseString(self, s: List[str]) -> None:
-        
         s.reverse()

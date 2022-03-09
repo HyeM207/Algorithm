@@ -8,4 +8,4 @@
 
 ## Site 
 - LeetCode 
-- Programmers - SQL 고득점 Kit - 완료 2022-02-18
+- Programmers - SQL 고득점 Kit - (완료 2022-02-18)
