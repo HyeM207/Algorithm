@@ -22,4 +22,24 @@ class Solution:
         else :
             return True
             
-       
+
+# Solution 2 (2회독_220608_성공)
+class Solution:
+    def isValid(self, s: str) -> bool:
+        
+        pairs = { '(' : ')', '{' : '}', '[' : ']' }
+        stacks = []
+        
+        for c in s :
+            if c in pairs.keys() :
+                stacks.append(c)
+            
+            elif len(stacks) == 0 or c != pairs[stacks.pop()] : 
+                return False 
+        
+        if stacks : 
+            return False
+        
+        return True
+
+# 후기 : 풀고나서 보니, 1차 풀이와 동일하게 풀었다.

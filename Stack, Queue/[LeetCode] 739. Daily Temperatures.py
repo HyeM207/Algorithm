@@ -16,3 +16,21 @@ class Solution:
             stack.append(i)
             
         return result 
+
+
+# Solution 2 (2회독_220608_성공)
+class Solution:
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        # 핵심 : stack에 지난 요일의 인덱스를 저장하자
+        
+        days = [] 
+        results = [0] * len(temperatures) 
+        
+        for i, t in enumerate(temperatures) :
+            while days and temperatures[days[-1]] < t: 
+                prev_idx = days.pop()
+                results[prev_idx] = i - prev_idx
+            
+            days.append(i)
+    
+        return results
