@@ -1,5 +1,8 @@
 # 문제 : 주어진 배열을 버블 정렬할 시, swap 한번도 일어나지 않은 루프가 언제인지 알아보기
 # 책 풀이 참고
+import sys
+input = sys.stdin.readline
+ 
 n = int(input())
 a = []
 
