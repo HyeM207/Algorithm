@@ -34,3 +34,40 @@ print(answer)
 # 주의 할점은 "방향 2가지"만 가지고 규칙 짜야됨 
 #           - "왼쪽 포인터 ++, 오른쪽 포인터--,오른쪽 포인터 ++" 이런식으로 방향 3개 두면 안 됨. 무한 루프 빠짐 (경험담)
 #           - 문제에 따라 다를 수도 있지만 대부분 그럴일 없음
+
+#######################
+# 230111 시도2 - (성공)
+import sys
+input = sys.stdin.readline
+
+n = int(input())
+m = int(input())
+nList = list(map(int, input().split()))
+
+# 정렬
+nList.sort()
+
+left = 0
+right = n-1
+hap = nList[left]
+answer = 0
+
+while left <= n-1 and left < right: # 개선 필요 (while left<right:)
+
+    hap = nList[left] + nList[right]
+
+    if hap == m :
+        # print(left, right, hap)
+        answer += 1
+        left += 1
+
+    elif hap > m :
+        right -= 1
+
+    else : # hap < m
+        left += 1
+
+
+print(answer)
+
+# 리뷰 : 첫 풀이때 left와 right 모두 앞에서 시작하는 코드로 짰는데 예외처리할 것이 너무 많아, right는 뒤에서부터 시작하는 코드로 수정했다.

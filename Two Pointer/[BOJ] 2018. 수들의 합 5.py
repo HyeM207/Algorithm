@@ -52,3 +52,35 @@ print(answer)
 #       3. hap이 n보다 크면 : 왼쪽 포인터 --, 합 --
 
 # hap이 n보다 크고/작고/같을 때 어떻게 포인터를 처리해줄지 모르겠다면 직접 그려가면서 규칙을 정해가면 풀린다! 
+
+######################
+# 230111 시도 3 - (성공) - 시도2보다 시간 더 적게 걸림
+import sys
+input = sys.stdin.readline
+
+n = int(input())
+
+answer = 1
+
+left, right = 1, 2
+hap = left + right
+
+while True :
+    if right > n or left > n//2 :
+        break
+    
+    if hap == n :
+        answer += 1
+        right += 1
+        hap += right
+    
+    if hap < n : 
+        right += 1
+        hap += right
+
+    if hap > n :
+        hap -= left
+        left += 1
+    
+print(answer)
+# 리뷰 : 투포인터 이용해서 풀이 완료.
