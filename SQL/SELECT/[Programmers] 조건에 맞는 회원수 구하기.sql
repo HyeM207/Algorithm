@@ -1,0 +1,6 @@
+-- 코드를 입력하세요
+SELECT COUNT(USER_ID) FROM USER_INFO WHERE JOINED LIKE '2021%' AND AGE BETWEEN 20 AND 29;
+
+/*
+    JOINED가 DATE 형인데 2021년만 뽑기 위해서 비교연산자인 LIKE를 이용함
+*/
