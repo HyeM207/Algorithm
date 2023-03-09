@@ -1,1 +1,8 @@
 SELECT ANIMAL_ID, NAME, DATETIME FROM ANIMAL_INS ORDER BY NAME ASC, DATETIME DESC;
+
+-- 2차 복습
+SELECT ANIMAL_ID, NAME, DATETIME from ANIMAL_INS order by NAME, DATETIME DESC;
+
+/*
+ORDER BY 사용 시 ','로 칼럼 이어서 작성 가능. 단 앞에 작성한 칼럼 우선순위로 정렬됨 
+*/
