@@ -35,3 +35,23 @@ def solution(part, comp):
 
     result = collections.Counter(part) - collections.Counter(comp)
     return list(result.keys())[0]
+
+'''
+# #3_230413 성공 
+    정확성: 50.0
+    효율성: 50.0
+    합계: 100.0 / 100.0
+    : 해시 구조인 딕셔너리를 이용한 정석 풀이
+'''
+def solution(participant, completion):
+    part_dict = {}
+    answer = ''
+    for p in participant:
+        part_dict[p] = part_dict.get(p,0) + 1
+    for c in completion : 
+        part_dict[c] -= 1 
+    
+    for k, v in part_dict.items() :
+        if v != 0 : 
+            answer = k
+    return answer
