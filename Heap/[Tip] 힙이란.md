@@ -7,8 +7,11 @@
 cf. 이진트리와의 차이점 : 최소 힙은 서로 정렬되어 있지 않다.
 
 ### 파이썬 heapq 
+> import heapq 
+
 - heapq.heappush(변수(리스트), 넣을 값)
-- heapq.heappop(변수(리스트))
+- heapq.heappop(변수(리스트)) # 리스트의 최소값 리턴
 - heapq.heapify(변수(리스트)) # 한 번에 모든 값 push
 - heapq.nlargest(k번째, 변수(리스트)) # k 번째만큼 큰 값이 가장 큰값부터 순서대로 리스트 리턴 
 - heapq.nsmallest(k번째, 변수(리스트))
+- 조회는 리스트[0] 이런식으로 하면 된다
