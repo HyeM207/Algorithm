@@ -1,0 +1,14 @@
+-- 230608 성공 
+/*
+! DISTINCT 해줘야 함 : SALES에서 고유하더라도 JOIN하고 (year, month, gender, user_id) 조합에서는 중복있을 수 있음
+*/
+SELECT 
+    YEAR(B.SALES_DATE) as YEAR,
+    MONTH(B.SALES_DATE) as MONTH,
+    A.GENDER as GENDER, 
+    COUNT(DISTINCT A.USER_ID) as USERS 
+FROM USER_INFO A
+INNER JOIN ONLINE_SALE B ON A.USER_ID=B.USER_ID
+WHERE A.GENDER IS NOT NULL
+GROUP BY 1,2,3
+ORDER BY 1,2,3;
