@@ -1,0 +1,17 @@
+-- 230611 
+-- 1차 성공
+-- FIND_IN_SET : ','로 구분된 문자열에서 특정 문자열 찾는 함수
+SELECT CAR_TYPE,
+        COUNT(CAR_ID) as CARS
+FROM CAR_RENTAL_COMPANY_CAR
+WHERE FIND_IN_SET('통풍시트' , OPTIONS) OR  FIND_IN_SET('열선시트' , OPTIONS) OR  FIND_IN_SET('가죽시트' , OPTIONS)
+GROUP BY CAR_TYPE 
+ORDER BY CAR_TYPE;
+
+-- 가능한 그 외 답
+-- 1)REGEXP : 정규식 
+WHERE OPTIONS REGEXP '통풍시트|열선시트|가죽시트'
+-- 2) LIKE 
+WHERE OPTIONS LIKE '%통풍시트%'
+OR OPTIONS LIKE '%열선시트%'
+OR OPTIONS LIKE '%가죽시트%'
