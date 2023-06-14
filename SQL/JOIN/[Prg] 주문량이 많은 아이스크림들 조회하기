@@ -1,0 +1,12 @@
+-- 230614 성공
+SELECT f.FLAVOR
+FROM FIRST_HALF as f INNER JOIN (
+    SELECT SHIPMENT_ID, FLAVOR, SUM(TOTAL_ORDER) as july_total 
+    FROM JULY GROUP BY FLAVOR
+) as j ON f.SHIPMENT_ID = j.SHIPMENT_ID
+ORDER BY f.TOTAL_ORDER+j.july_total DESC 
+LIMIT 3;
+
+/*
+  합산을 SELECT 문에서만 할 수 있는 줄 알았는데, ORDER BY에서도 할 수 있다는 것을 알게됨
+*/
