@@ -7,4 +7,4 @@ class Solution:
                 nums.pop(i)
             else:
                 i += 1
-        print(nums)
+        return len(nums)
