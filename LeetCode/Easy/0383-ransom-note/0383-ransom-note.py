@@ -12,12 +12,20 @@ class Solution:
 #             alpha[r] -= 1
 #         return True
 
-        # 2. Counter를 이용한 풀이
-        m_count = Counter(magazine)
-        r_count = Counter(ransomNote)
-        m_count.subtract(r_count) 
-        remain = sorted(list(m_count.values()), reverse=True)
-        while remain:
-            if remain.pop() < 0:
+#         # 2. Counter를 이용한 풀이
+#         m_count = Counter(magazine)
+#         r_count = Counter(ransomNote)
+#         m_count.subtract(r_count) 
+#         remain = sorted(list(m_count.values()), reverse=True)
+#         while remain:
+#             if remain.pop() < 0:
+#                 return False
+#             return True
+        
+        # 3. 문자열을 이용한 풀이
+        for r in ransomNote:
+            if r in magazine:
+                magazine = magazine.replace(r,"",1)
+            else:
                 return False
-            return True
+        return True
