@@ -22,10 +22,13 @@ class Solution:
 #                 return False
 #             return True
         
-        # 3. 문자열을 이용한 풀이 => O(n) 순회 1번 
-        for r in ransomNote:
-            if r in magazine:
-                magazine = magazine.replace(r,"",1)
-            else:
-                return False
-        return True
+        # # 3. 문자열을 이용한 풀이 => O(n) 순회 1번 
+        # for r in ransomNote:
+        #     if r in magazine:
+        #         magazine = magazine.replace(r,"",1)
+        #     else:
+        #         return False
+        # return True
+        
+        # 4. set과 count를 이용한 풀이
+        return all(ransomNote.count(c) <= magazine.count(c) for c in set(ransomNote))
