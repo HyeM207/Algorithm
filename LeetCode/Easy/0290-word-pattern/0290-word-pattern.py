@@ -34,3 +34,22 @@ class Solution:
             else:
                 return False
         return True
+
+        # 풀이 3. 딕셔너리 2개 활용 -> .values() 할 필요 없어짐
+        words = s.split()
+        if len(words) != len(pattern):
+            return False
+
+        mappingPW = {}
+        mappingWP = {}
+        for p,w in zip(pattern,words):
+            if p not in mappingPW:
+                if w in mappingWP:
+                    return False
+                else:
+                    mappingPW[p] = w
+                    mappingWP[w] = p
+            else:
+                if mappingWP[p] != w:
+                    return False           
+        return True
