@@ -44,12 +44,17 @@ SELECT DISTINCT(price) FROM PRODUCT LIMIT 5;
 
 ## #️⃣  조건문
 ### ✅ if문
-IF (조건, 참, 거짓) : SQL의 조건문
+- `IF (조건, 참, 거짓)` : SQL의 조건문
 ex.
 ```sql
 SELECT ANIMAL_TYPE, IF(NAME IS NULL, 'No name', NAME), SEX_UPON_INTAKE
     FROM ANIMAL_INS 
     ORDER BY ANIMAL_ID;
+```
+- `IFNULL(칼럼, NULL이면 대체할 값)` : NULL인 칼럼에 출력할 값 대체
+```sql
+SELECT IFNULL(s.attended_exams, 0) as attended_exams
+FROM Student s;
 ```
 
 ### ✅ CASE문
@@ -60,26 +65,6 @@ CASE
     ELSE 반환값
 END
 ```
-
-## #️⃣ 출력 형태  
-Date 형의 경우 `DATE_FORMAT(변수명, 출력형태)`으로 출력 형태 바꿀 수 있음 
-- %Y : 4자리 년도
-- %y : 2자리 년도
-- %M : 영문 긴 월
-- %m : 숫자 월(두자리)
-- %c : 숫자 월(한자리)
-- %b : 영문 짧은 월
-- %d : 일자(두자리)
-- %e : 일자(한자리)
-- %W : 영문 긴 요일 이름
-- %a : 영문 짧은 요일 이름 
-- %l : 시간 (12시간)
-- %H : 시간 (24시간)
-- %i : 분
-- %T : hh:mm:SS
-- %r : hh:mm:ss AM,PM
-- %s : 초
-
 
 ## #️⃣ where 조건절 
 - 비교 연산자 : =, >, >= ,<, <=
@@ -119,11 +104,79 @@ Date 형의 경우 `DATE_FORMAT(변수명, 출력형태)`으로 출력 형태 �
 
 ## #️⃣ JOIN
 두 개 이상의 테이블/데이터베이스를 연결하여 데이터 검색하는 방법 
-- 두 개 이상의 테이블의 칼럼을 서로 공유함
-
+- `INNER JOIN` : 두 테이블의 교집합
+- `OUTER JOIN` : 한 테이블에만 데이터 있어도 출력
+    - LEFT, RIGHT, FULL 종류 있음
+    - (예시) A테이블의 특정 칼럼을 기준으로 B테이블에는 매칭되는 값이 없다면, A테이블 기준 B 테이블을 LEFT JOIN하면 A테이블의 X칼럼의 값이 NULL로 들어감
+- `CROSS JOIN` : 두 테이블 모두 모든 행을 조인함
+- `SELF JOIN` : 자기 자신과 조인 (INNER JOIN과 동일)
+![Alt text](image.png)
+- 출처 : https://hongong.hanbit.co.kr/sql-%EA%B8%B0%EB%B3%B8-%EB%AC%B8%EB%B2%95-joininner-outer-cross-self-join/
 
 ## #️⃣ concat
 문자열 붙이기 (단위 출력시 사용)
 
 ## #️⃣ 별칭 
 AS 칼럼명
+
+
+<hr>
+<br>
+
+# 📌 날짜 관련 함수
+
+## #️⃣ DATE 형 출력 형태  
+Date 형의 경우 `DATE_FORMAT(변수명, 출력형태)`으로 출력 형태 바꿀 수 있음 
+- `%Y` : 4자리 년도
+- `%y` : 2자리 년도
+- `%M` : 영문 긴 월
+- `%m` : 숫자 월(두자리)
+- `%c` : 숫자 월(한자리)
+- `%b` : 영문 짧은 월
+- `%d` : 일자(두자리)
+- `%e` : 일자(한자리)
+- `%W` : 영문 긴 요일 이름
+- `%a` : 영문 짧은 요일 이름 
+- `%l` : 시간 (12시간)
+- `%H` : 시간 (24시간)
+- `%i` : 분
+- `%T` : hh:mm:SS
+- `%r` : hh:mm:ss AM,PM
+- `%s` : 초
+
+## #️⃣ 특정 년,월,시 등 추출
+
+| 함수 | 설명 | 
+| --- | ---|
+| `DATE(표현식)` | 표현식에 맞는 날짜 정보 | 
+| `MONTH(date)`  | 월 (0~12) |
+| `DAY(date)` | 일(0~31) |
+| `HOUR(DATE)` | 시간 (0~23) |
+|`MINUTE(date)` | 분 (0~59)| 
+| `SECOND(date)` | 초(0~59) | 
+| `WEEKDAY(date)` | 요일 (월=0 ~ 일=6)| 
+| `LAST_DAY(date)` | 해당 월의 마지막 날짜 | 
+| `SEC_TO_TIME(seconds)`| seconds를 기준으로 시간 정보 반환(형식 HH:MM:SS)|
+
+## #️⃣ 특정 날짜/시간 연산
+### ✅ 일자 및 시간 더하고 빼기
+| 함수 | 설명 | 
+| --- | ---|
+| `ADDDATE(date, INTERVAL value addunit)` | date에 unit단위 만큼 value를 더한 date 반환| 
+| `SUBDATE(date, INTERVAL value unit)`| date에 unit단위 만큼 value를 뺀 date 반환 |
+| `ADDTIEM(datetime, addtime)` | datetime에 addtime 만큼 시간을 추가한 datetime을 반환|
+| `SUBTIEM(datetime, addtime)` | datetime에 addtime 만큼 시간을 뺀 datetime을 반환|
+
+```sql
+SELECT w.id
+FROM Weather w
+    JOIN Weather wc
+    ON SUBDATE(w.recordDate, INTERVAL 1 DAY) = wc.recordDate
+WHERE w.temperature > wc.temperature;
+```
+### ✅ 두 date 기간 차이 구하기
+| 함수 | 설명 | 
+| --- | ---|
+| `PERIOD_DIFF(기간1, 기간2)` | 두 기간 차이 숫자로 반환 ('기간' 형식은 YYMM 혹은 YYYYMM 형식, 기간1과 기간2는 같은 형식이어야 함)|
+| `DATEDIFF(date1, date2)` | 두 날짜 사이 일수 숫자로 반환 |
+| `TIMEDIFF(time1, time2)` | 두 시간 차이를 datetime 타입으로 반환 |  
