@@ -6,6 +6,7 @@
 #         self.right = right
 class Solution:
     # 풀이1: dfs 함수로 각 트리를 순회하여 노드들을 리스트에 담고, 둘의 리스트를 비교함
+    # 끝 leaf 노드 까지 도달한 후에 '돌아오면서' 자식 노드들을 left와 right로 가져와 현재 노드와 합쳐 하나의 리스트를 만듦. 
 #     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
 #         def dfs(head, nodes):
 #             if not head:
