@@ -35,9 +35,7 @@ class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         def dfs(root, depth):
             if not root: 
-                print("not root")
                 return depth
-            print(root.val, depth)
             return max(dfs(root.left, depth + 1), dfs(root.right, depth + 1))
                        
         return dfs(root, 0)
