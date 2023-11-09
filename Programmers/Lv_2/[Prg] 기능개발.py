@@ -29,3 +29,27 @@ def solution(progresses, speeds):
     answer.append(cnt)
     
     return answer
+
+"""
+# #2-231109 성공
+풀이 2
+"""
+import math 
+def solution(progresses, speeds):
+    answer = []
+    """
+    while문으로 n만큼 순회하며 배포 순서의 프로세스보다 뒤에 것이 작으면 같이 배포함
+    """
+    i = 0 
+    while i < len(progresses):
+        due = math.ceil( (100-progresses[i]) / speeds[i] ) # 배포 순서의 프로세스 필요 일 수 
+        j = i + 1
+        # 뒤의 프로세스 작업 일 수 계산 
+        while j < len(progresses):
+            day = math.ceil( (100-progresses[j]) / speeds[j] )
+            if day > due:
+                break
+            j += 1
+        answer.append(j-i)
+        i = j
+    return answer
