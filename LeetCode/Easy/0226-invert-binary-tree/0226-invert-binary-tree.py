@@ -19,7 +19,7 @@ class Solution:
         root = dfs(root)
         return root
     
-    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+    def invertTree_(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         """
         풀이 2. 원래함수를 재귀함수로 만들어 풀이함
         """
@@ -29,4 +29,24 @@ class Solution:
         
         self.invertTree(root.left)
         self.invertTree(root.right)
+        return root
+
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        """
+        풀이 3. while문으로 노드 탐색 후 swap
+            - 탐색할 노드는 deque에 저장 (큐)
+        """
+        from collections import deque
+        todo = deque([root]) # 탐색할 노드 append
+        node = root
+        while len(todo):
+            node = todo.popleft()
+            if (node == None):
+                continue
+
+            todo.append(node.left)
+            todo.append(node.right)
+
+            node.left, node.right = node.right, node.left
+
         return root
