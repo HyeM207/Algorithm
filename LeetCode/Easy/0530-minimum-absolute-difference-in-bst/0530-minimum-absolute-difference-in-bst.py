@@ -33,3 +33,30 @@ class Solution:
             if diff < min_diff:
                 min_diff = diff
         return min_diff
+    
+    # 풀이2. 이진탐색트리의 특성을 살려 "중위순회"를 하면 sort할 필요가 없음!!
+    """
+    전위순회 (Preorder) : 중앙 -> 좌 -> 우
+    중위순회 (Inorder) : 좌 -> 중앙 -> 우
+    후위순회 (Postorder) : 좌 -> 우 -> 중앙
+    
+    """
+    def getMinimumDifference(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        
+        sorted_nodes = []
+        min_diff = float(inf)
+        # 1) 중위 순회
+        def inorder(node, sorted_nodes):
+            if not node:
+                return
+            inorder(node.left, sorted_nodes)
+            sorted_nodes.append(node.val)
+            inorder(node.right, sorted_nodes)
+        inorder(root, sorted_nodes)
+        # 2) 최소차 찾기
+        for i in range(len(sorted_nodes)-1):
+            min_diff = min(min_diff, sorted_nodes[i+1] - sorted_nodes[i])
+        return min_diff
+        
