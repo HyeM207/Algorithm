@@ -5,14 +5,15 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
+    # 풀이1 .이중 while문 사용
+    def averageOfLevels_(self, root: Optional[TreeNode]) -> List[float]:
         queue = [root]
         result = []
         
         while queue:
             lv  = queue[:]
             nodes = [] # 같은 레벨의 노드만 저장
-            next_nodes = [] # 다음 레벨의 큐
+            next_nodes = [] # 다음 레벨의 노드들 저장
             while lv:
                 node = lv.pop()
                 nodes.append(node.val)
@@ -25,4 +26,23 @@ class Solution:
             result.append(sum(nodes)/ len(nodes))    
             queue = next_nodes[:]
 
+        return result
+    
+    # 풀이 2. while과 for문을 이용한 풀이. 더 가독성 높음
+    def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
+        queue = [root]
+        result = []
+        
+        while queue:
+            cur_sum = 0
+            cur_nodes = queue
+            queue = [] # 초기화 필요
+            for node in cur_nodes:
+                cur_sum += node.val
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+            result.append(cur_sum/len(cur_nodes))
+            
         return result
