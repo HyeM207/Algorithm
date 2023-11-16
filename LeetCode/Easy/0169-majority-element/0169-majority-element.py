@@ -1,5 +1,5 @@
 class Solution:
-    def majorityElement(self, nums: List[int]) -> int:
+    def majorityElement_(self, nums: List[int]) -> int:
         """
         목표 : O(1)
         1. sort해서 앞에서 부터 카운트 -> 최소 O(n/2+NlogN)) ~ O(n+NlogN)
@@ -18,3 +18,8 @@ class Solution:
                 now_num = n
                 cnt = 1
         return now_num
+    
+        # 풀이2. 정렬 시 majority 원소는 개수가 많으니 중간에 있음 
+    def majorityElement(self, nums: List[int]) -> int:
+        nums.sort()
+        return nums[len(nums)//2]
