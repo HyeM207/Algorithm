@@ -35,7 +35,7 @@ class Solution:
         hashmap = {}
         for i, num in enumerate(nums):
             complement = target - num
-            if complement in hashmap: # 해시맵을 이용하여 탐색 시간 줄임
+            if complement in hashmap: # 해시맵을 이용하여 탐색 시간 줄임 => O(1)
                 return [i, hashmap[complement]]
             hashmap[num] = i
         
