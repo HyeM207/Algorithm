@@ -15,7 +15,7 @@ class Solution:
         existed = {} 
         hap = 0
         while hap != 1:
-            hap = sum(int(square[i]) for i in str(n))
+            hap = sum(int(square[i])**2 for i in str(n))
             n = hap
             if existed.get(n, 'False') is True: # 이미 등장했던 숫자인지 검토
                 return False
