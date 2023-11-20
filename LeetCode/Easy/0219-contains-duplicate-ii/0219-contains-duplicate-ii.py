@@ -1,6 +1,6 @@
 class Solution:
-    # 풀이 1: 딕셔너리를 활용한 구현
-    def containsNearbyDuplicate_(self, nums: List[int], k: int) -> bool:
+    # 풀이 1: 딕셔너리를 활용한 구현 <- 성능 더 좋음
+    def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
         """
         문제 해석 : k 거리 사이에 i와 j 인덱스의 값이 같은지 확인
         [1,2,3,1,2,3,3]
