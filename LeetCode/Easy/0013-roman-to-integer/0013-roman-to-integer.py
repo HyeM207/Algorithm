@@ -1,6 +1,6 @@
 class Solution:
     # 풀이 1: 딕셔너리 이용하여 1회 순회
-    def romanToInt(self, s: str) -> int:
+    def romanToInt_(self, s: str) -> int:
         """
         값은 딕셔너리화 하고,for문으로 1회만 돌자
             - 1회 돌때 이전 값을 더함
@@ -19,6 +19,29 @@ class Solution:
                 result += symbols.get(prev, 0)
                 prev = c   
         result += symbols.get(prev, 0)
+        
+        return result
+    
+    # 풀이 2: 더하고 빼기
+    def romanToInt(self, s: str) -> int:
+        symbols = {
+            'I': 1,
+            'V': 5,
+            'X': 10,
+            'L': 50,
+            'C': 100,
+            'D': 500,
+            'M': 1000
+        }
+        
+        result = 0
+        
+        # 현재와 이후값을 계산하여 더함
+        for i in range(len(s)):
+            if i < len(s) - 1 and symbols[s[i]] < symbols[s[i+1]]:
+                result -= symbols[s[i]]
+            else:
+                result += symbols[s[i]]
         
         return result
     
