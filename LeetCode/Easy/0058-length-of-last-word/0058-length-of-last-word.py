@@ -1,5 +1,6 @@
 class Solution:
     # 풀이1. 내장 함수 이용한 한 줄 코드 <- 더 나음
+    # 참고 split()하면 단어의 선행 및 후행의 빈 공백은 모두 포함X
     def lengthOfLastWord(self, s: str) -> int:
         return len(s.split()[-1])
     
