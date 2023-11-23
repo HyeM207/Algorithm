@@ -27,6 +27,7 @@ class Solution:
     
     # 풀이 2 :  완전이진트리 특성 이용  => O(log^2 N)
     # 참고: https://leetcode.com/problems/count-complete-tree-nodes/discuss/2815567/python3-general-Binary-Search-using-template
+    # 단점 : 마지막 레벨에 노드가 존재한다면 해당 레벨의 모든 노드는 존재하므로, 마지막 레벨의 노드 수를 찾는 데에 이진 탐색을 적용하는 것이 비효율적
     def countNodes_(self, root: Optional[TreeNode]) -> int:
         """
         1. 깊이 구함 (맨 왼쪽 기준) - root부터 leaf노드 위치한 그 위의 높이까지 노드 개수 계산 가능
@@ -62,7 +63,8 @@ class Solution:
 
         return lastLevelLength - 1 + s
     
-    # 참고 3 :
+    # 풀이 3 : 왼쪽과 오른쪽 깊이 구하여, 그에 따른 노드 수 계산 => O(Log^2 n)
+    # 참고 : 다른 사람 풀이 , GPT
     def countNodes(self, root: Optional[TreeNode]) -> int:
         if not root:
             return 0
@@ -71,10 +73,10 @@ class Solution:
         depth_right = self.right_depth(root)
 
         if depth_left == depth_right:
-            # If the left and right depths are equal, the tree is a perfect binary tree.
+            # 완전 이진 트리 -> 바로 공식 이용함
             return 2**depth_left - 1
         else:
-            # If the depths are not equal, the tree is not perfect.
+            # left와 right 깊이가 같지 않으면 (== 균형X) 재귀적으로 호출하여 품 
             return 1 + self.countNodes(root.left) + self.countNodes(root.right)
 
     def left_depth(self, node: TreeNode) -> int:
