@@ -25,6 +25,7 @@ class Solution:
             
         return dfs(root, 0)   
     
+    
     # 풀이2 : 본 함수 이용하기
     def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
         if not root:
@@ -35,3 +36,24 @@ class Solution:
             return targetSum == 0
 
         return self.hasPathSum(root.left, targetSum) or self.hasPathSum(root.right, targetSum)
+    
+    
+    # 풀이 3:  재귀 없이 while문 stack으로
+    def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
+        if not root:
+            return False 
+        
+        stack = [(root, targetSum-root.val)]
+
+        while(stack):
+            # 탐색할 노드 pop하고 append
+            current_node,current_sum = stack.pop() 
+
+            if(not current_node.right and not current_node.left and current_sum == 0):
+                return True
+            if(current_node.left):
+                stack.append((current_node.left, current_sum - current_node.left.val))
+            if(current_node.right):
+                stack.append((current_node.right, current_sum - current_node.right.val))
+
+        return False 
