@@ -5,6 +5,11 @@
 #         self.left = left
 #         self.right = right
 class Solution:
+    """
+    ! 풀이 정리 !
+    - 풀이1, 2는 재귀함수라, 중복 탐색이 있음. 그러나 풀이3은 stack과 while문을 활용하여 중복 탐색 X
+    - 풀이 1과 2의 차이는 개발자 스타일에 따름. 특히 풀이2는 targetSum이 오염된다는 문제가 있음
+    """
     # 풀이 1: dfs. "root" ~ "leaf" 임
     def hasPathSum_(self, root: Optional[TreeNode], targetSum: int) -> bool:
         def dfs(node, hap):
@@ -12,9 +17,6 @@ class Solution:
                 return False
             
             hap += node.val
-            # 동일한 코드지만 가독성 높임
-            # if hap == targetSum and (node.right is None and node.left is None):
-            #     return True
             if not node.left and not node.right:
                 return hap == targetSum
 
@@ -49,11 +51,11 @@ class Solution:
             # 탐색할 노드 pop하고 append
             current_node,current_sum = stack.pop() 
 
-            if(not current_node.right and not current_node.left and current_sum == 0):
+            if not current_node.right and not current_node.left and current_sum == 0:
                 return True
-            if(current_node.left):
+            if current_node.left:
                 stack.append((current_node.left, current_sum - current_node.left.val))
-            if(current_node.right):
+            if current_node.right:
                 stack.append((current_node.right, current_sum - current_node.right.val))
 
         return False 
