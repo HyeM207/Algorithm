@@ -27,7 +27,7 @@ class Solution:
     
     # 풀이 2 :  완전이진트리 특성 이용  => O(log^2 N)
     # 참고: https://leetcode.com/problems/count-complete-tree-nodes/discuss/2815567/python3-general-Binary-Search-using-template
-    def countNodes(self, root: Optional[TreeNode]) -> int:
+    def countNodes_(self, root: Optional[TreeNode]) -> int:
         """
         1. 깊이 구함 (맨 왼쪽 기준) - root부터 leaf노드 위치한 그 위의 높이까지 노드 개수 계산 가능
         2. 마지막 leaf 노드 개수 확인 
@@ -61,3 +61,32 @@ class Solution:
                 e = mid
 
         return lastLevelLength - 1 + s
+    
+    # 참고 3 :
+    def countNodes(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+
+        depth_left = self.left_depth(root)
+        depth_right = self.right_depth(root)
+
+        if depth_left == depth_right:
+            # If the left and right depths are equal, the tree is a perfect binary tree.
+            return 2**depth_left - 1
+        else:
+            # If the depths are not equal, the tree is not perfect.
+            return 1 + self.countNodes(root.left) + self.countNodes(root.right)
+
+    def left_depth(self, node: TreeNode) -> int:
+        depth = 0
+        while node:
+            depth += 1
+            node = node.left
+        return depth
+
+    def right_depth(self, node: TreeNode) -> int:
+        depth = 0
+        while node:
+            depth += 1
+            node = node.right
+        return depth
