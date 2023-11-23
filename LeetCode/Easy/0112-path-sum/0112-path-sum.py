@@ -12,12 +12,15 @@ class Solution:
                 return False
             
             hap += node.val
-            if hap == targetSum and (node.right is None and node.left is None):
-                return True
+            # 동일한 코드지만 가독성 높임
+            # if hap == targetSum and (node.right is None and node.left is None):
+            #     return True
+            if not node.left and not node.right:
+                return hap == targetSum
 
             right = dfs(node.right, hap)
             left = dfs(node.left, hap)
         
             return right or left
             
-        return dfs(root, 0)
+        return dfs(root, 0)    
