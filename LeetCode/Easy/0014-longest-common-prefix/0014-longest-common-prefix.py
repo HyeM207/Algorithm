@@ -17,7 +17,7 @@ class Solution:
         return answer
     
     # 풀이 2 : for문 1회
-    def longestCommonPrefix(self, strs: List[str]) -> str:
+    def longestCommonPrefix_(self, strs: List[str]) -> str:
         if not strs:
             return ""
 
@@ -29,7 +29,18 @@ class Solution:
                 answer += strs[0][i]
             else:
                 break
-                
         return answer
-        
+    
+    # 풀이 3: sort를 이용하여 처음과 끝 비교
+    # 이유: sort하면 문자열순으로 정렬해줌으로써 처음 str과 끝 str만 비교하면 됨 
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        answer = ""
+        sl = sorted(strs)
+        first = sl[0]
+        last = sl[-1]
+        for i in range(min(len(first),len(last))):
+            if (first[i] != last[i]):
+                return answer
+            answer += first[i]
+        return answer
         
