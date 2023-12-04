@@ -1,6 +1,6 @@
 class Solution:
     # 풀이 1: pop과 append를 이용한 풀이
-    def removeDuplicates(self, nums: List[int]) -> int:
+    def removeDuplicates_(self, nums: List[int]) -> int:
         if len(nums) < 3:
             return len(nums) 
  
@@ -23,16 +23,17 @@ class Solution:
                     
         return len(nums)-dup_cnt
 
-#     # 풀이2 : 인덱스를 이용한 풀이
-#     def removeDuplicates(self, nums: List[int]) -> int:
-#         if len(nums) < 3:
-#             return len(nums)
+    # 풀이2 : 인덱스를 이용한 풀이
+    def removeDuplicates(self, nums: List[int]) -> int:
+        if len(nums) < 3:
+            return len(nums)
         
-#         idx = 2  # 중복이 최대 2개까지만 허용되므로 인덱스 2부터 시작
+        idx = 2  # 중복이 최대 2개까지만 허용되므로 인덱스 2부터 시작
+        # idx위치에 값을 채워나감
         
-#         for i in range(2, len(nums)):
-#             if nums[i] != nums[idx - 2]:  # 중복이 최대 2개까지만 허용되므로 두 칸 이전의 요소와 비교
-#                 nums[idx] = nums[i]
-#                 idx += 1
+        for i in range(2, len(nums)):
+            if nums[i] != nums[idx - 2]:  # 중복이 최대 2개까지만 허용되므로 두 칸 이전의 요소와 비교
+                nums[idx] = nums[i]
+                idx += 1
         
-#         return idx
+        return idx
