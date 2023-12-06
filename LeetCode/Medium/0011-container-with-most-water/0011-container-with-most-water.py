@@ -1,5 +1,5 @@
 class Solution:
-    # 풀이 1: 투포인터 이용
+    # 풀이 1: 투포인터 이용=> 시간 복잡도 O(n), 공간복잡도 O(1)
     def maxArea(self, height: List[int]) -> int:
         left = 0
         right = len(height) - 1
