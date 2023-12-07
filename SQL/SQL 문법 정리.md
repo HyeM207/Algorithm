@@ -108,6 +108,7 @@ END
 - `OUTER JOIN` : 한 테이블에만 데이터 있어도 출력
     - LEFT, RIGHT, FULL 종류 있음
     - (예시) A테이블의 특정 칼럼을 기준으로 B테이블에는 매칭되는 값이 없다면, A테이블 기준 B 테이블을 LEFT JOIN하면 A테이블의 X칼럼의 값이 NULL로 들어감
+    - Mysql  에서는 `LEFT OUTER JOIN` 이 아닌 `LEFT JOIN`으로 사용한다.
 - `CROSS JOIN` : 두 테이블 모두 모든 행을 조인함
 - `SELF JOIN` : 자기 자신과 조인 (INNER JOIN과 동일)
 ![Alt text](image.png)
@@ -180,3 +181,6 @@ WHERE w.temperature > wc.temperature;
 | `PERIOD_DIFF(기간1, 기간2)` | 두 기간 차이 숫자로 반환 ('기간' 형식은 YYMM 혹은 YYYYMM 형식, 기간1과 기간2는 같은 형식이어야 함)|
 | `DATEDIFF(date1, date2)` | 두 날짜 사이 일수 숫자로 반환 |
 | `TIMEDIFF(time1, time2)` | 두 시간 차이를 datetime 타입으로 반환 |  
+
+### ✅ 두 date 기간안에 있는지 계산하기 
+- Mysql에서는 DATE 형의 값끼리 `BEWTWEEN A AND B` 구문 (단, A와 B모두 DATE형)을 사용하여 해당 기간안에 비교할 날짜가 속하는지 계산할 수 있다.
