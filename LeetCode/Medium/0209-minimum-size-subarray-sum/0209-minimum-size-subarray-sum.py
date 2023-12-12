@@ -1,5 +1,5 @@
 class Solution:
-    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+    def minSubArrayLen_(self, target: int, nums: List[int]) -> int:
         """
         풀이 1 : 투포인터
             - 오른쪽 포인터는 합이 target보다 작을때 이동
@@ -25,3 +25,25 @@ class Solution:
                 hap += nums[right]
                 
         return answer
+    
+    
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
+        """
+        풀이 2 : 투포인터 (풀이 1 개선)
+        """
+        left, right = 0, 0
+        hap = nums[0]
+        answer = float('inf')
+
+        while left < len(nums):
+            if hap >= target:
+                answer = min(answer, right - left + 1)
+                hap -= nums[left]
+                left += 1
+            else:
+                right += 1
+                if right == len(nums):
+                    break
+                hap += nums[right]
+
+        return 0 if answer == float('inf') else answer
