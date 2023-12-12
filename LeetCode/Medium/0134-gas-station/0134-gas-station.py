@@ -1,15 +1,6 @@
 class Solution:
-    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
-        """
-        현재 역에서 충전 -> 이동 cost 마이너스 -> 충전  -> ... 반복
-        충전 & 이동을 미리 계산한 것을 이용하여 접근
-        
-        gas = [1,2,3,4,5]
-        cost = [3,4,5,1,2]
-        
-        t = [-2,-2,-2,3,3] => 5
-            0 1 2 3 4        
-        """
+    # 풀이 1: 출발 가능한 시작점을 위치잡아 순회 O(N^2) 
+    def canCompleteCircuit_(self, gas: List[int], cost: List[int]) -> int:
         answer = -1
         amount = 0
         start = 0
@@ -29,3 +20,20 @@ class Solution:
                     start = (start + i) # 실패한 곳부터 start 인덱스 재설정
             start += 1
         return -1
+    
+    
+    # 풀이 2: 한 번 순회 도전 O(n)
+    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
+        # 불가능한 경우 미리 제외
+        if sum(gas) - sum(cost) < 0 :
+                return -1
+            
+        answer = 0
+        tank = 0
+        
+        for i in range(len(gas)):
+            tank += gas[i] - cost[i] # 포인트!! ==> 가스와 비용의 차이를 누적
+            if tank < 0: # 음수면, 현재까지의 출발지점들은 불가하다는 의미
+                tank = 0
+                answer = i+1
+        return answer
