@@ -14,7 +14,7 @@ class Solution:
     
     # 풀이 2: 그리디&이진 탐색 (풀이 참고) => O(nLogn) 
     """
-    sub 배열에는 
+    subsequential 배열을 직접 완성해나가는 풀이
     
     bisect_left(a, x) :정렬된 a에 x를 삽입할 인덱스 리턴
         만약, x가 a에 이미 있으면 기존 항목의 앞 (왼쪽)의 위치를 반환한다.
