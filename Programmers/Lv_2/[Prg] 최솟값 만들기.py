@@ -15,3 +15,15 @@ def solution(A,B):
         answer += A[i] * B[i]
 
     return answer
+
+
+# 풀이 2
+def solution(A,B):
+    """
+    풀이 : 곱하고 더한 값이 최소값이 되려면, 곱할 때 가장 큰것과 가장 작은 것을 곱해야된다.
+        => O(n logn) 
+    """
+    A.sort()
+    B.sort(reverse=True)
+
+    return sum([a * b for a, b in zip(A, B)])
