@@ -1,6 +1,6 @@
 class Solution:
-    # 풀이 1
-    def findPeakElement(self, nums: List[int]) -> int:
+    # 풀이 1 : 이진탐색 => O(log n)
+    def findPeakElement1(self, nums: List[int]) -> int:
         """
         이진탐색 풀이 
             - left, right, mid 포인터 이용
@@ -26,3 +26,15 @@ class Solution:
                 answer = max_index(answer, right)
                 
         return answer
+    
+    # 풀이 2: 이진 탐색 (더 간단한 코드) => O(log n)
+    # 풀이 1과 다르게 answer를 갱신하는거 없이, left를 리턴함
+    def findPeakElement(self, nums: List[int]) -> int:
+        left, right = 0, len(nums)-1 
+        while left < right: 
+            mid = (left + right) // 2 
+            if nums[mid] < nums[mid+1]:
+                left = mid + 1 
+            else: 
+                right = mid 
+        return left
