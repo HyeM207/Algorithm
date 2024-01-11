@@ -1,4 +1,4 @@
-# 풀이 1 (240111) : 성공
+# 풀이 1 (240111) : 성공 - 코드 별로임
 from collections import Counter
 from itertools import combinations
 import re
@@ -55,3 +55,39 @@ def solution(user_id, banned_id):
     
     # 중복을 제거하고 최종 결과의 개수를 반환
     return len(set(answer))
+
+
+# 풀이 2 (240111) : 성공 - 풀이 1 개선
+"""
+counter 사용하지 않고, banned_id 리스트를 그대로 순회하며 가능한 restrit_id를 matches에 append함
+ - counter 필요 없는 이유 : answer에서 set으로 중복 처리하기 때문에, 중복되는 banned_id를 신경 쓸 필요없다.
+"""
+from collections import Counter
+import re
+
+def solution(user_id, banned_id):
+    def get_restrict_id(b_id):
+        """정규표현식 이용하여 찾기"""
+        pattern = re.sub(r'\*', '.', b_id)
+        pattern = f'^{pattern}$'
+        p = re.compile(pattern)
+        
+        return [uid for uid in user_id if p.match(uid)]
+    
+    def search(i, matches=[]):
+        nonlocal answer  
+        if i >= len(banned_id):
+            answer.add(tuple(sorted(matches)))  
+            return 
+        
+        b_id = banned_id[i]
+        poss_r_id = get_restrict_id(b_id)
+        
+        for r_id in poss_r_id:
+            if r_id not in matches:
+                search(i+1, matches + [r_id])
+    
+    answer = set()
+    search(0)
+
+    return len(answer)
