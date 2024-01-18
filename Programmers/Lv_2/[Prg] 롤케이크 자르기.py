@@ -21,3 +21,24 @@ def solution(topping):
             answer += 1
             
     return answer
+
+# 풀이 2 (240118) : 성공 - 풀이 1 보다 실행속도 더 빠름
+from collections import Counter
+
+def solution(topping):
+    """
+    풀이법: 왼쪽은 set, 오른쪽은 Counter를 이용해 중복 제거 및 종류가짓수 확인힘
+    """
+    answer = 0
+    left = set()
+    right = Counter(topping)
+    
+    for n in topping:
+        right[n] -= 1
+        if right[n] == 0:
+            right.pop(n)
+        left.add(n)
+        if len(left) == len(right):
+            answer += 1
+            
+    return answer
